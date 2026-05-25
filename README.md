@@ -2,6 +2,12 @@
 
 A German language learning web app built in **C++17**, demonstrating advanced OOP concepts through a fully functional browser-based quiz and progress system.
 
+![C++17](https://img.shields.io/badge/C%2B%2B-17-blue?logo=cplusplus&logoColor=white)
+![Crow](https://img.shields.io/badge/Crow-HTTP%20Framework-darkgreen)
+![nlohmann/json](https://img.shields.io/badge/nlohmann%2Fjson-3.x-orange)
+![Platform](https://img.shields.io/badge/Platform-Linux-yellow?logo=linux&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-brightgreen)
+
 ---
 
 ## Features
@@ -136,6 +142,19 @@ make clean && make
 
 ---
 
+## Credits
+
+- **[Crow](https://github.com/CrowCpp/Crow)** — C++ HTTP framework by CrowCpp, used for the REST API server. Licensed under BSD 3-Clause.
+- **[nlohmann/json](https://github.com/nlohmann/json)** — Single-header JSON library by Niels Lohmann, used for all JSON serialization and parsing. Licensed under MIT.
+
+---
+
+## License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
 ## Author
 
-Gurleen Kaur — built as a C++ OOP demonstration project.
+Gurleen Kaur
