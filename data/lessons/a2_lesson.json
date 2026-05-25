@@ -1,0 +1,752 @@
+[
+  {
+    "id": "a2_conversations",
+    "title": "Daily Conversations",
+    "level": "A2",
+    "description": "Essential phrases for real-life conversations — asking, explaining, and getting help",
+    "xpReward": 15,
+    "words": [
+      {
+        "german": "Wie heißen Sie?",
+        "english": "What is your name?",
+        "roman": "vee hai-sen zee",
+        "example": "Guten Tag! Wie heißen Sie?",
+        "exampleTrans": "Good day! What is your name?",
+        "category": "conversation"
+      },
+      {
+        "german": "Woher kommen Sie?",
+        "english": "Where are you from?",
+        "roman": "voh-hair ko-men zee",
+        "example": "Woher kommen Sie? — Ich komme aus Indien.",
+        "exampleTrans": "Where are you from? — I come from India.",
+        "category": "conversation"
+      },
+      {
+        "german": "Was machen Sie beruflich?",
+        "english": "What do you do for work?",
+        "roman": "vas makh-en zee beh-roof-likh",
+        "example": "Was machen Sie beruflich? — Ich bin Lehrerin.",
+        "exampleTrans": "What do you do for work? — I am a teacher.",
+        "category": "conversation"
+      },
+      {
+        "german": "Ich arbeite als ...",
+        "english": "I work as ...",
+        "roman": "ikh ar-bai-teh als",
+        "example": "Ich arbeite als Ingenieur.",
+        "exampleTrans": "I work as an engineer.",
+        "category": "conversation"
+      },
+      {
+        "german": "Können Sie das wiederholen?",
+        "english": "Can you repeat that?",
+        "roman": "kö-nen zee das vee-der-hoh-len",
+        "example": "Entschuldigung, können Sie das bitte wiederholen?",
+        "exampleTrans": "Excuse me, can you please repeat that?",
+        "category": "conversation"
+      },
+      {
+        "german": "Ich verstehe nicht.",
+        "english": "I don't understand.",
+        "roman": "ikh fer-shteh-eh nikht",
+        "example": "Ich verstehe nicht. Können Sie langsamer sprechen?",
+        "exampleTrans": "I don't understand. Can you speak more slowly?",
+        "category": "conversation"
+      },
+      {
+        "german": "Sprechen Sie Englisch?",
+        "english": "Do you speak English?",
+        "roman": "shprekh-en zee eng-lish",
+        "example": "Sprechen Sie Englisch oder Deutsch?",
+        "exampleTrans": "Do you speak English or German?",
+        "category": "conversation"
+      },
+      {
+        "german": "Langsamer, bitte.",
+        "english": "Slower, please.",
+        "roman": "lang-zah-mer bit-teh",
+        "example": "Können Sie bitte langsamer sprechen?",
+        "exampleTrans": "Can you please speak more slowly?",
+        "category": "conversation"
+      },
+      {
+        "german": "Was kostet das?",
+        "english": "How much does that cost?",
+        "roman": "vas kos-tet das",
+        "example": "Entschuldigung, was kostet das hier?",
+        "exampleTrans": "Excuse me, how much does this cost?",
+        "category": "conversation"
+      },
+      {
+        "german": "Wo ist die Toilette?",
+        "english": "Where is the toilet?",
+        "roman": "voh ist dee toy-let-eh",
+        "example": "Entschuldigung, wo ist die Toilette, bitte?",
+        "exampleTrans": "Excuse me, where is the toilet, please?",
+        "category": "conversation"
+      },
+      {
+        "german": "Ich bin müde.",
+        "english": "I am tired.",
+        "roman": "ikh bin mü-deh",
+        "example": "Ich bin sehr müde. Ich gehe jetzt schlafen.",
+        "exampleTrans": "I am very tired. I'm going to sleep now.",
+        "category": "conversation"
+      },
+      {
+        "german": "Ich habe Hunger.",
+        "english": "I am hungry.",
+        "roman": "ikh hah-beh hoon-ger",
+        "example": "Ich habe großen Hunger. Lass uns essen!",
+        "exampleTrans": "I am very hungry. Let's eat!",
+        "category": "conversation"
+      },
+      {
+        "german": "Ich habe Durst.",
+        "english": "I am thirsty.",
+        "roman": "ikh hah-beh doorst",
+        "example": "Ich habe Durst. Haben Sie Wasser?",
+        "exampleTrans": "I am thirsty. Do you have water?",
+        "category": "conversation"
+      },
+      {
+        "german": "Ich bin krank.",
+        "english": "I am sick.",
+        "roman": "ikh bin krank",
+        "example": "Ich bin krank und brauche einen Arzt.",
+        "exampleTrans": "I am sick and need a doctor.",
+        "category": "conversation"
+      },
+      {
+        "german": "Ruf einen Arzt!",
+        "english": "Call a doctor!",
+        "roman": "roof ai-nen artst",
+        "example": "Hilfe! Bitte ruf sofort einen Arzt!",
+        "exampleTrans": "Help! Please call a doctor immediately!",
+        "category": "conversation"
+      }
+    ]
+  },
+  {
+    "id": "a2_perfekt",
+    "title": "Past Tense — Perfekt",
+    "level": "A2",
+    "description": "Talk about what you did — the Perfekt tense with haben and sein",
+    "xpReward": 20,
+    "words": [
+      {
+        "german": "Ich habe gegessen.",
+        "english": "I have eaten / I ate.",
+        "roman": "ikh hah-beh geh-ges-en",
+        "example": "Ich habe heute schon gegessen.",
+        "exampleTrans": "I have already eaten today. (haben verb)",
+        "category": "perfekt"
+      },
+      {
+        "german": "Ich habe getrunken.",
+        "english": "I have drunk / I drank.",
+        "roman": "ikh hah-beh geh-trunk-en",
+        "example": "Ich habe einen Kaffee getrunken.",
+        "exampleTrans": "I drank a coffee. (haben verb)",
+        "category": "perfekt"
+      },
+      {
+        "german": "Ich habe geschlafen.",
+        "english": "I have slept / I slept.",
+        "roman": "ikh hah-beh geh-shlah-fen",
+        "example": "Ich habe sehr gut geschlafen.",
+        "exampleTrans": "I slept very well. (haben verb)",
+        "category": "perfekt"
+      },
+      {
+        "german": "Ich habe gearbeitet.",
+        "english": "I have worked / I worked.",
+        "roman": "ikh hah-beh geh-ar-bai-tet",
+        "example": "Ich habe heute viel gearbeitet.",
+        "exampleTrans": "I worked a lot today. (haben verb)",
+        "category": "perfekt"
+      },
+      {
+        "german": "Ich habe gespielt.",
+        "english": "I have played / I played.",
+        "roman": "ikh hah-beh geh-shpeelt",
+        "example": "Die Kinder haben draußen gespielt.",
+        "exampleTrans": "The children played outside. (haben verb)",
+        "category": "perfekt"
+      },
+      {
+        "german": "Ich bin gegangen.",
+        "english": "I have gone / I went.",
+        "roman": "ikh bin geh-gang-en",
+        "example": "Ich bin zu Fuß zur Schule gegangen.",
+        "exampleTrans": "I walked to school. (sein verb — movement)",
+        "category": "perfekt"
+      },
+      {
+        "german": "Ich bin gefahren.",
+        "english": "I have traveled / I traveled.",
+        "roman": "ikh bin geh-fah-ren",
+        "example": "Ich bin mit dem Zug nach Berlin gefahren.",
+        "exampleTrans": "I traveled to Berlin by train. (sein verb — movement)",
+        "category": "perfekt"
+      },
+      {
+        "german": "Ich bin aufgestanden.",
+        "english": "I have gotten up / I got up.",
+        "roman": "ikh bin owf-geh-shtahn-den",
+        "example": "Ich bin um sieben Uhr aufgestanden.",
+        "exampleTrans": "I got up at seven o'clock. (sein verb — change of state)",
+        "category": "perfekt"
+      },
+      {
+        "german": "Ich habe gelesen.",
+        "english": "I have read / I read.",
+        "roman": "ikh hah-beh geh-leh-zen",
+        "example": "Ich habe ein spannendes Buch gelesen.",
+        "exampleTrans": "I read an exciting book. (haben verb)",
+        "category": "perfekt"
+      },
+      {
+        "german": "Ich habe geschrieben.",
+        "english": "I have written / I wrote.",
+        "roman": "ikh hah-beh geh-shree-ben",
+        "example": "Ich habe eine E-Mail geschrieben.",
+        "exampleTrans": "I wrote an email. (haben verb)",
+        "category": "perfekt"
+      },
+      {
+        "german": "Ich habe gesehen.",
+        "english": "I have seen / I saw.",
+        "roman": "ikh hah-beh geh-zeh-en",
+        "example": "Ich habe einen guten Film gesehen.",
+        "exampleTrans": "I saw a good film. (haben verb)",
+        "category": "perfekt"
+      },
+      {
+        "german": "Ich habe gehört.",
+        "english": "I have heard / I heard.",
+        "roman": "ikh hah-beh geh-höhrt",
+        "example": "Ich habe das leider nicht gehört.",
+        "exampleTrans": "Unfortunately I didn't hear that. (haben verb)",
+        "category": "perfekt"
+      }
+    ]
+  },
+  {
+    "id": "a2_phrases",
+    "title": "Common Phrases",
+    "level": "A2",
+    "description": "Everyday expressions for agreeing, disagreeing, and keeping the conversation going",
+    "xpReward": 15,
+    "words": [
+      {
+        "german": "Kein Problem.",
+        "english": "No problem.",
+        "roman": "kain proh-blehm",
+        "example": "Danke für deine Hilfe! — Kein Problem!",
+        "exampleTrans": "Thank you for your help! — No problem!",
+        "category": "phrase"
+      },
+      {
+        "german": "Natürlich.",
+        "english": "Of course.",
+        "roman": "nah-tür-likh",
+        "example": "Kannst du mir helfen? — Natürlich!",
+        "exampleTrans": "Can you help me? — Of course!",
+        "category": "phrase"
+      },
+      {
+        "german": "Vielleicht.",
+        "english": "Maybe.",
+        "roman": "fee-laikht",
+        "example": "Kommst du morgen? — Vielleicht.",
+        "exampleTrans": "Are you coming tomorrow? — Maybe.",
+        "category": "phrase"
+      },
+      {
+        "german": "Ich weiß nicht.",
+        "english": "I don't know.",
+        "roman": "ikh vais nikht",
+        "example": "Wo ist er? — Ich weiß nicht.",
+        "exampleTrans": "Where is he? — I don't know.",
+        "category": "phrase"
+      },
+      {
+        "german": "Ich denke ja.",
+        "english": "I think so.",
+        "roman": "ikh deng-keh yah",
+        "example": "Ist das richtig? — Ich denke ja.",
+        "exampleTrans": "Is that right? — I think so.",
+        "category": "phrase"
+      },
+      {
+        "german": "Ich denke nicht.",
+        "english": "I don't think so.",
+        "roman": "ikh deng-keh nikht",
+        "example": "Kommt er heute? — Ich denke nicht.",
+        "exampleTrans": "Is he coming today? — I don't think so.",
+        "category": "phrase"
+      },
+      {
+        "german": "Gute Idee!",
+        "english": "Good idea!",
+        "roman": "goo-teh ee-deh-eh",
+        "example": "Lass uns Pizza essen! — Gute Idee!",
+        "exampleTrans": "Let's eat pizza! — Good idea!",
+        "category": "phrase"
+      },
+      {
+        "german": "Das stimmt.",
+        "english": "That's right.",
+        "roman": "das shtimt",
+        "example": "Berlin ist die Hauptstadt. — Das stimmt.",
+        "exampleTrans": "Berlin is the capital. — That's right.",
+        "category": "phrase"
+      },
+      {
+        "german": "Das stimmt nicht.",
+        "english": "That's not right.",
+        "roman": "das shtimt nikht",
+        "example": "Das stimmt nicht! Du liegst falsch.",
+        "exampleTrans": "That's not right! You are wrong.",
+        "category": "phrase"
+      },
+      {
+        "german": "Ich bin einverstanden.",
+        "english": "I agree.",
+        "roman": "ikh bin ain-fer-shtan-den",
+        "example": "Ich bin einverstanden mit deinem Vorschlag.",
+        "exampleTrans": "I agree with your suggestion.",
+        "category": "phrase"
+      },
+      {
+        "german": "Ich bin nicht einverstanden.",
+        "english": "I disagree.",
+        "roman": "ikh bin nikht ain-fer-shtan-den",
+        "example": "Tut mir leid, aber ich bin nicht einverstanden.",
+        "exampleTrans": "Sorry, but I disagree.",
+        "category": "phrase"
+      },
+      {
+        "german": "Es tut mir leid.",
+        "english": "I am sorry.",
+        "roman": "es toot meer lait",
+        "example": "Es tut mir leid, das war mein Fehler.",
+        "exampleTrans": "I am sorry, that was my mistake.",
+        "category": "phrase"
+      },
+      {
+        "german": "Macht nichts.",
+        "english": "Never mind / It's okay.",
+        "roman": "makht nikhts",
+        "example": "Es tut mir leid! — Macht nichts, kein Problem.",
+        "exampleTrans": "I am sorry! — Never mind, no problem.",
+        "category": "phrase"
+      },
+      {
+        "german": "Bis später!",
+        "english": "See you later!",
+        "roman": "bis shpeh-ter",
+        "example": "Ich muss jetzt gehen. Bis später!",
+        "exampleTrans": "I have to go now. See you later!",
+        "category": "phrase"
+      },
+      {
+        "german": "Viel Glück!",
+        "english": "Good luck!",
+        "roman": "feel glük",
+        "example": "Viel Glück bei deiner Prüfung morgen!",
+        "exampleTrans": "Good luck on your exam tomorrow!",
+        "category": "phrase"
+      }
+    ]
+  },
+  {
+    "id": "a2_family",
+    "title": "Family and Relationships",
+    "level": "A2",
+    "description": "Talk about your family members and the people close to you",
+    "xpReward": 15,
+    "words": [
+      {
+        "german": "die Mutter",
+        "english": "mother",
+        "roman": "dee moo-ter",
+        "example": "Meine Mutter kocht sehr gut.",
+        "exampleTrans": "My mother cooks very well.",
+        "category": "family"
+      },
+      {
+        "german": "der Vater",
+        "english": "father",
+        "roman": "dair fah-ter",
+        "example": "Mein Vater arbeitet als Ingenieur.",
+        "exampleTrans": "My father works as an engineer.",
+        "category": "family"
+      },
+      {
+        "german": "die Schwester",
+        "english": "sister",
+        "roman": "dee shves-ter",
+        "example": "Ich habe eine ältere Schwester.",
+        "exampleTrans": "I have an older sister.",
+        "category": "family"
+      },
+      {
+        "german": "der Bruder",
+        "english": "brother",
+        "roman": "dair broo-der",
+        "example": "Mein Bruder ist zwei Jahre jünger als ich.",
+        "exampleTrans": "My brother is two years younger than me.",
+        "category": "family"
+      },
+      {
+        "german": "die Großmutter",
+        "english": "grandmother",
+        "roman": "dee grohs-moo-ter",
+        "example": "Meine Großmutter macht den besten Kuchen.",
+        "exampleTrans": "My grandmother makes the best cake.",
+        "category": "family"
+      },
+      {
+        "german": "der Großvater",
+        "english": "grandfather",
+        "roman": "dair grohs-fah-ter",
+        "example": "Mein Großvater erzählt gern Geschichten.",
+        "exampleTrans": "My grandfather likes telling stories.",
+        "category": "family"
+      },
+      {
+        "german": "die Tante",
+        "english": "aunt",
+        "roman": "dee tan-teh",
+        "example": "Meine Tante wohnt in München.",
+        "exampleTrans": "My aunt lives in Munich.",
+        "category": "family"
+      },
+      {
+        "german": "der Onkel",
+        "english": "uncle",
+        "roman": "dair on-kel",
+        "example": "Mein Onkel hat drei Kinder.",
+        "exampleTrans": "My uncle has three children.",
+        "category": "family"
+      },
+      {
+        "german": "die Cousine",
+        "english": "female cousin",
+        "roman": "dee koo-zee-neh",
+        "example": "Meine Cousine studiert Medizin in Wien.",
+        "exampleTrans": "My female cousin studies medicine in Vienna.",
+        "category": "family"
+      },
+      {
+        "german": "der Cousin",
+        "english": "male cousin",
+        "roman": "dair koo-zan",
+        "example": "Mein Cousin spielt sehr gut Gitarre.",
+        "exampleTrans": "My male cousin plays guitar very well.",
+        "category": "family"
+      },
+      {
+        "german": "die Ehefrau",
+        "english": "wife",
+        "roman": "dee eh-eh-frou",
+        "example": "Seine Ehefrau ist Ärztin.",
+        "exampleTrans": "His wife is a doctor.",
+        "category": "family"
+      },
+      {
+        "german": "der Ehemann",
+        "english": "husband",
+        "roman": "dair eh-eh-man",
+        "example": "Ihr Ehemann kommt aus Österreich.",
+        "exampleTrans": "Her husband is from Austria.",
+        "category": "family"
+      },
+      {
+        "german": "das Kind",
+        "english": "child",
+        "roman": "das kint",
+        "example": "Das Kind spielt im Garten.",
+        "exampleTrans": "The child plays in the garden.",
+        "category": "family"
+      },
+      {
+        "german": "die Eltern",
+        "english": "parents",
+        "roman": "dee el-tern",
+        "example": "Meine Eltern wohnen in Hamburg.",
+        "exampleTrans": "My parents live in Hamburg.",
+        "category": "family"
+      },
+      {
+        "german": "die Familie",
+        "english": "family",
+        "roman": "dee fah-mee-lee-eh",
+        "example": "Die ganze Familie trifft sich am Sonntag.",
+        "exampleTrans": "The whole family meets on Sunday.",
+        "category": "family"
+      }
+    ]
+  },
+  {
+    "id": "a2_time",
+    "title": "Time and Dates",
+    "level": "A2",
+    "description": "Ask the time, talk about days, weeks, and use German clock expressions",
+    "xpReward": 15,
+    "words": [
+      {
+        "german": "Wie spät ist es?",
+        "english": "What time is it?",
+        "roman": "vee shpäyt ist es",
+        "example": "Entschuldigung, wie spät ist es bitte?",
+        "exampleTrans": "Excuse me, what time is it please?",
+        "category": "time"
+      },
+      {
+        "german": "Es ist drei Uhr.",
+        "english": "It is three o'clock.",
+        "roman": "es ist dry oor",
+        "example": "Es ist genau drei Uhr nachmittags.",
+        "exampleTrans": "It is exactly three o'clock in the afternoon.",
+        "category": "time"
+      },
+      {
+        "german": "halb vier",
+        "english": "half past three (3:30)",
+        "roman": "halb fear",
+        "example": "Der Zug fährt um halb vier ab.",
+        "exampleTrans": "The train departs at half past three. (halb vier = half to four = 3:30)",
+        "category": "time"
+      },
+      {
+        "german": "Viertel nach fünf",
+        "english": "quarter past five (5:15)",
+        "roman": "feer-tel nakh fünf",
+        "example": "Wir treffen uns um Viertel nach fünf.",
+        "exampleTrans": "We'll meet at quarter past five.",
+        "category": "time"
+      },
+      {
+        "german": "Viertel vor sechs",
+        "english": "quarter to six (5:45)",
+        "roman": "feer-tel fohr zeks",
+        "example": "Es ist Viertel vor sechs — beeil dich!",
+        "exampleTrans": "It is quarter to six — hurry up!",
+        "category": "time"
+      },
+      {
+        "german": "heute",
+        "english": "today",
+        "roman": "hoy-teh",
+        "example": "Was machst du heute Abend?",
+        "exampleTrans": "What are you doing tonight?",
+        "category": "time"
+      },
+      {
+        "german": "gestern",
+        "english": "yesterday",
+        "roman": "ges-tern",
+        "example": "Gestern war ich den ganzen Tag im Büro.",
+        "exampleTrans": "Yesterday I was in the office all day.",
+        "category": "time"
+      },
+      {
+        "german": "morgen",
+        "english": "tomorrow",
+        "roman": "mor-gen",
+        "example": "Morgen habe ich einen wichtigen Termin.",
+        "exampleTrans": "Tomorrow I have an important appointment.",
+        "category": "time"
+      },
+      {
+        "german": "diese Woche",
+        "english": "this week",
+        "roman": "dee-zeh vo-kheh",
+        "example": "Ich bin diese Woche sehr beschäftigt.",
+        "exampleTrans": "I am very busy this week.",
+        "category": "time"
+      },
+      {
+        "german": "nächste Woche",
+        "english": "next week",
+        "roman": "nekhs-teh vo-kheh",
+        "example": "Nächste Woche fahre ich nach Berlin.",
+        "exampleTrans": "Next week I'm going to Berlin.",
+        "category": "time"
+      },
+      {
+        "german": "der Montag",
+        "english": "Monday",
+        "roman": "dair mon-tahk",
+        "example": "Am Montag beginnt immer die neue Woche.",
+        "exampleTrans": "The new week always begins on Monday.",
+        "category": "time"
+      },
+      {
+        "german": "der Freitag",
+        "english": "Friday",
+        "roman": "dair frai-tahk",
+        "example": "Am Freitag gehe ich mit Freunden aus.",
+        "exampleTrans": "On Friday I go out with friends.",
+        "category": "time"
+      },
+      {
+        "german": "das Wochenende",
+        "english": "the weekend",
+        "roman": "das vo-khen-en-deh",
+        "example": "Am Wochenende schlafe ich gern lange.",
+        "exampleTrans": "On the weekend I like to sleep in.",
+        "category": "time"
+      },
+      {
+        "german": "der Monat",
+        "english": "the month",
+        "roman": "dair moh-nat",
+        "example": "Der Monat Dezember ist sehr kalt.",
+        "exampleTrans": "The month of December is very cold.",
+        "category": "time"
+      },
+      {
+        "german": "das Jahr",
+        "english": "the year",
+        "roman": "das yahr",
+        "example": "Dieses Jahr lerne ich intensiv Deutsch.",
+        "exampleTrans": "This year I am learning German intensively.",
+        "category": "time"
+      }
+    ]
+  },
+  {
+    "id": "a2_shopping",
+    "title": "Shopping and Money",
+    "level": "A2",
+    "description": "Buy things, ask prices, and handle money in German shops and markets",
+    "xpReward": 15,
+    "words": [
+      {
+        "german": "Was kostet das?",
+        "english": "How much does this cost?",
+        "roman": "vas kos-tet das",
+        "example": "Entschuldigung, was kostet dieses Hemd?",
+        "exampleTrans": "Excuse me, how much does this shirt cost?",
+        "category": "shopping"
+      },
+      {
+        "german": "Es kostet fünf Euro.",
+        "english": "It costs five euros.",
+        "roman": "es kos-tet fünf oy-roh",
+        "example": "Das Brot kostet zwei Euro.",
+        "exampleTrans": "The bread costs two euros.",
+        "category": "shopping"
+      },
+      {
+        "german": "Ich möchte das kaufen.",
+        "english": "I would like to buy this.",
+        "roman": "ikh mökhh-teh das kow-fen",
+        "example": "Ich möchte diesen Pullover kaufen, bitte.",
+        "exampleTrans": "I would like to buy this sweater, please.",
+        "category": "shopping"
+      },
+      {
+        "german": "Haben Sie das in einer anderen Größe?",
+        "english": "Do you have this in another size?",
+        "roman": "hah-ben zee das in ai-ner an-de-ren grö-seh",
+        "example": "Haben Sie das in einer kleineren Größe?",
+        "exampleTrans": "Do you have this in a smaller size?",
+        "category": "shopping"
+      },
+      {
+        "german": "Zu teuer.",
+        "english": "Too expensive.",
+        "roman": "tsoo toy-er",
+        "example": "Das ist mir zu teuer. Haben Sie etwas Günstigeres?",
+        "exampleTrans": "That is too expensive for me. Do you have something cheaper?",
+        "category": "shopping"
+      },
+      {
+        "german": "ein Sonderangebot",
+        "english": "a special offer / sale",
+        "roman": "ain zon-der-an-geh-bot",
+        "example": "Das ist ein Sonderangebot — dreißig Prozent Rabatt!",
+        "exampleTrans": "That is a special offer — thirty percent off!",
+        "category": "shopping"
+      },
+      {
+        "german": "die Rechnung",
+        "english": "the bill",
+        "roman": "dee rekh-nung",
+        "example": "Kann ich bitte die Rechnung haben?",
+        "exampleTrans": "Can I have the bill, please?",
+        "category": "shopping"
+      },
+      {
+        "german": "das Wechselgeld",
+        "english": "the change",
+        "roman": "das vek-sel-gelt",
+        "example": "Hier ist Ihr Wechselgeld — drei Euro.",
+        "exampleTrans": "Here is your change — three euros.",
+        "category": "shopping"
+      },
+      {
+        "german": "der Supermarkt",
+        "english": "the supermarket",
+        "roman": "dair zoo-per-markt",
+        "example": "Ich kaufe jeden Tag im Supermarkt ein.",
+        "exampleTrans": "I shop at the supermarket every day.",
+        "category": "shopping"
+      },
+      {
+        "german": "die Bäckerei",
+        "english": "the bakery",
+        "roman": "dee bek-eh-rai",
+        "example": "In der Bäckerei gibt es frisches Brot und Brötchen.",
+        "exampleTrans": "In the bakery there is fresh bread and rolls.",
+        "category": "shopping"
+      },
+      {
+        "german": "der Markt",
+        "english": "the market",
+        "roman": "dair markt",
+        "example": "Am Samstag gehe ich auf den Wochenmarkt.",
+        "exampleTrans": "On Saturday I go to the weekly market.",
+        "category": "shopping"
+      },
+      {
+        "german": "bar bezahlen",
+        "english": "to pay cash",
+        "roman": "bar beh-tsah-len",
+        "example": "Ich möchte bar bezahlen, bitte.",
+        "exampleTrans": "I would like to pay cash, please.",
+        "category": "shopping"
+      },
+      {
+        "german": "mit Karte bezahlen",
+        "english": "to pay by card",
+        "roman": "mit kar-teh beh-tsah-len",
+        "example": "Kann ich hier mit Karte bezahlen?",
+        "exampleTrans": "Can I pay by card here?",
+        "category": "shopping"
+      },
+      {
+        "german": "der Preis",
+        "english": "the price",
+        "roman": "dair prais",
+        "example": "Der Preis ist sehr günstig.",
+        "exampleTrans": "The price is very reasonable.",
+        "category": "shopping"
+      },
+      {
+        "german": "das Angebot",
+        "english": "the offer / deal",
+        "roman": "das an-geh-bot",
+        "example": "Das Angebot gilt nur bis Sonntag.",
+        "exampleTrans": "The deal is only valid until Sunday.",
+        "category": "shopping"
+      }
+    ]
+  }
+]

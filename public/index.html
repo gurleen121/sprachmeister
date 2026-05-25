@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprachmeister — Learn German</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#FAFAF5;--cream2:#F3F2EA;--cream3:#ECEADE;
+  --ink:#1A1814;--ink2:#2E2B24;--ink3:#524E45;--muted:#8A8576;
+  --border:#D8D4C8;--border2:#C8C3B4;
+  --gold:#B8860B;--gold2:#D4A017;--gold-light:#F5E6B8;--gold-pale:#FBF5E0;
+  --green:#2D6A4F;--green-bg:#EAF4EE;--green-border:#A8D5BA;
+  --red:#8B1A1A;--red-bg:#FBF0EF;--red-border:#E8BABA;
+  --shadow-sm:0 1px 3px rgba(26,24,20,.06),0 1px 2px rgba(26,24,20,.04);
+  --shadow-md:0 4px 16px rgba(26,24,20,.08),0 2px 6px rgba(26,24,20,.05);
+  --shadow-lg:0 12px 40px rgba(26,24,20,.12),0 4px 12px rgba(26,24,20,.06);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Crimson Pro',Georgia,serif;background:var(--cream);color:var(--ink);min-height:100vh;overflow-x:hidden}
+
+/* CLOCK */
+#clock-widget{position:fixed;top:20px;left:20px;z-index:1000;perspective:300px;cursor:default;user-select:none}
+.clock-face{width:72px;height:72px;border-radius:50%;background:linear-gradient(145deg,#fff 0%,var(--cream2) 40%,var(--cream3) 100%);border:2px solid var(--border);box-shadow:var(--shadow-md),inset 0 1px 3px rgba(255,255,255,.9);position:relative;transform:rotateX(12deg) rotateY(-8deg);transform-style:preserve-3d;transition:transform .3s ease}
+#clock-widget:hover .clock-face{transform:rotateX(4deg) rotateY(-2deg)}
+.clock-face::before{content:'';position:absolute;inset:-1px;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.6) 0%,transparent 60%);pointer-events:none}
+.clock-mark{position:absolute;width:2px;height:6px;background:var(--border2);border-radius:1px;left:50%;top:4px;transform-origin:50% 30px;margin-left:-1px}
+.clock-mark:nth-child(1){transform:rotate(0deg)}.clock-mark:nth-child(2){transform:rotate(30deg)}.clock-mark:nth-child(3){transform:rotate(60deg)}.clock-mark:nth-child(4){transform:rotate(90deg)}.clock-mark:nth-child(5){transform:rotate(120deg)}.clock-mark:nth-child(6){transform:rotate(150deg)}.clock-mark:nth-child(7){transform:rotate(180deg)}.clock-mark:nth-child(8){transform:rotate(210deg)}.clock-mark:nth-child(9){transform:rotate(240deg)}.clock-mark:nth-child(10){transform:rotate(270deg)}.clock-mark:nth-child(11){transform:rotate(300deg)}.clock-mark:nth-child(12){transform:rotate(330deg)}
+.clock-mark:nth-child(3n+1){height:9px;background:var(--ink3);width:2.5px}
+.clock-hand{position:absolute;bottom:50%;left:50%;transform-origin:50% 100%;border-radius:3px 3px 0 0}
+#hand-hour{width:3px;height:18px;background:var(--ink);margin-left:-1.5px;box-shadow:0 1px 3px rgba(26,24,20,.3)}
+#hand-min{width:2px;height:24px;background:var(--ink2);margin-left:-1px}
+#hand-sec{width:1.5px;height:27px;background:var(--gold);margin-left:-.75px}
+.clock-center{position:absolute;width:6px;height:6px;background:var(--ink);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2}
+.clock-time-text{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);text-align:center;margin-top:5px;letter-spacing:.05em}
+
+/* LAYOUT */
+#app{width:100%;max-width:680px;margin:0 auto;padding:32px 20px 60px;min-height:100vh}
+
+/* SCREENS */
+.screen{display:none}
+.screen.active{display:block;animation:screenIn .5s cubic-bezier(.22,.68,0,1.2) both}
+@keyframes screenIn{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* CARD */
+.card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:40px;box-shadow:var(--shadow-md);position:relative;overflow:hidden}
+.card+.card{margin-top:16px}
+.card::before{content:'';position:absolute;inset:0;border-radius:20px;background-image:radial-gradient(circle at 20% 20%,rgba(184,134,11,.03) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(26,24,20,.02) 0%,transparent 50%);pointer-events:none}
+
+/* EYEBROW */
+.eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+.eyebrow-line{width:28px;height:1.5px;background:linear-gradient(90deg,var(--gold),transparent)}
+.eyebrow-text{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.eyebrow-tag{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);background:var(--cream2);border:1px solid var(--border);border-radius:4px;padding:2px 6px;margin-left:4px}
+
+/* TYPOGRAPHY */
+h1{font-family:'Playfair Display',serif;font-size:52px;line-height:1.05;font-weight:700;color:var(--ink);margin-bottom:14px;letter-spacing:-.02em}
+h1 em{font-style:italic;color:var(--gold);font-weight:600}
+h2{font-family:'Playfair Display',serif;font-size:30px;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+.sub{font-family:'Crimson Pro',serif;color:var(--muted);font-size:17px;line-height:1.6;margin-bottom:28px;font-weight:300;font-style:italic}
+
+/* HERO DECO */
+.hero-deco{position:absolute;top:-20px;right:-20px;width:220px;height:220px;opacity:.06;pointer-events:none;transform:rotate(15deg)}
+.hero-accent{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2),transparent);border-radius:0 0 20px 20px}
+.hero-lang-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold-pale);border:1px solid var(--gold-light);border-radius:30px;padding:6px 16px;margin-bottom:20px;font-size:14px;color:var(--gold);font-family:'Crimson Pro',serif}
+
+/* TABS */
+.tabs{display:flex;gap:3px;background:var(--cream2);border:1px solid var(--border);border-radius:12px;padding:4px;margin-bottom:24px}
+.tab{flex:1;padding:9px;border:none;border-radius:9px;cursor:pointer;font-family:'Crimson Pro',serif;font-size:15px;background:transparent;color:var(--muted);transition:all .2s}
+.tab.active{background:#fff;color:var(--ink);font-weight:600;box-shadow:var(--shadow-sm)}
+.tab:hover:not(.active){color:var(--ink2)}
+
+/* FIELDS */
+.field{margin-bottom:18px}
+label{display:block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+input[type=text],input[type=password]{width:100%;background:var(--cream);border:1.5px solid var(--border);border-radius:10px;color:var(--ink);font-family:'Crimson Pro',serif;font-size:17px;padding:13px 16px;outline:none;transition:border-color .2s,box-shadow .2s,background .2s}
+input:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 3px rgba(184,134,11,.08)}
+input::placeholder{color:var(--muted);font-style:italic}
+
+/* BUTTONS */
+.btn{background:var(--ink);border:none;border-radius:10px;color:var(--cream);cursor:pointer;font-family:'Crimson Pro',serif;font-size:16px;font-weight:600;padding:13px 24px;letter-spacing:.01em;transition:background .2s,transform .1s,box-shadow .2s;width:100%;box-shadow:0 2px 8px rgba(26,24,20,.18)}
+.btn:hover{background:var(--ink2);box-shadow:0 4px 16px rgba(26,24,20,.22)}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#fff;box-shadow:0 2px 12px rgba(184,134,11,.3)}
+.btn-gold:hover{box-shadow:0 4px 20px rgba(184,134,11,.4);filter:brightness(1.05)}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--ink3);box-shadow:none}
+.btn-ghost:hover{border-color:var(--ink3);background:var(--cream2);box-shadow:none}
+.btn-row{display:flex;gap:12px}.btn-row .btn{flex:1}
+
+/* PROGRESS */
+.prog-wrap{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.prog-bar{flex:1;height:4px;background:var(--cream3);border-radius:10px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:10px;transition:width .5s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px rgba(184,134,11,.4)}
+.prog-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);white-space:nowrap}
+
+/* FLASHCARD */
+.flashcard-scene{perspective:1000px;margin-bottom:20px}
+.flashcard{background:linear-gradient(160deg,#fff 0%,var(--cream) 100%);border:1.5px solid var(--border);border-radius:20px;padding:36px 32px;text-align:center;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:var(--shadow-md);transition:transform .35s ease,box-shadow .35s ease;position:relative}
+.flashcard:hover{transform:translateY(-2px) rotateX(2deg);box-shadow:var(--shadow-lg)}
+.fc-badge{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);background:var(--gold-pale);border:1px solid var(--gold-light);border-radius:20px;padding:4px 13px;margin-bottom:18px}
+.fc-german{font-family:'Playfair Display',serif;font-size:46px;font-weight:600;color:var(--ink);margin-bottom:4px;letter-spacing:-.01em}
+.fc-roman{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:14px;letter-spacing:.05em}
+.fc-letter{font-family:'Playfair Display',serif;font-size:80px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:12px;text-shadow:0 2px 12px rgba(184,134,11,.2)}
+.fc-cols{display:flex;gap:32px;margin-bottom:14px}
+.fc-col{text-align:center}
+.fc-col-label{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:5px}
+.fc-col-val{font-family:'Playfair Display',serif;font-size:24px;font-weight:600;color:var(--ink)}
+.fc-example{font-family:'Crimson Pro',serif;font-size:13px;color:var(--muted);font-style:italic;border-top:1px solid var(--border);padding-top:14px;width:100%;line-height:1.5}
+.fc-trans{font-size:12px;color:var(--muted);margin-top:4px;opacity:.7}
+
+/* NAV ROW */
+.nav-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.nav-btn{background:#fff;border:1.5px solid var(--border);border-radius:10px;color:var(--ink3);cursor:pointer;font-size:16px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:var(--shadow-sm)}
+.nav-btn:hover{border-color:var(--gold);color:var(--gold);box-shadow:var(--shadow-md)}
+.nav-btn:disabled{opacity:.25;cursor:not-allowed;box-shadow:none}
+.card-counter{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)}
+
+/* QUIZ */
+.quiz-word{font-family:'Playfair Display',serif;font-size:54px;font-weight:700;text-align:center;margin:20px 0 6px;color:var(--ink);letter-spacing:-.02em;animation:wordIn .4s cubic-bezier(.22,.68,0,1.2)}
+@keyframes wordIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.quiz-roman{text-align:center;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:6px;letter-spacing:.04em}
+.quiz-input-wrap{position:relative;margin-bottom:14px}
+.quiz-input-wrap input{padding-right:52px;font-size:17px}
+#submitBtn{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--ink);border:none;border-radius:8px;color:var(--cream);cursor:pointer;font-size:14px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;transition:background .2s}
+#submitBtn:hover{background:var(--gold)}
+
+/* FEEDBACK */
+.feedback{border-radius:10px;padding:12px 16px;font-family:'Crimson Pro',serif;font-size:16px;margin-bottom:14px;display:none;animation:feedIn .3s cubic-bezier(.22,.68,0,1.2)}
+@keyframes feedIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.feedback.correct{background:var(--green-bg);border:1px solid var(--green-border);color:var(--green);display:block}
+.feedback.wrong{background:var(--red-bg);border:1px solid var(--red-border);color:var(--red);display:block}
+
+/* RESULTS */
+.score-ring-wrap{display:flex;justify-content:center;margin:24px 0}
+.score-circle{width:120px;height:120px;border-radius:50%;background:conic-gradient(var(--gold) 0% var(--pct,0%),var(--cream3) var(--pct,0%) 100%);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 0 0 3px var(--cream),0 0 0 4px var(--border)}
+.score-circle::after{content:'';position:absolute;inset:12px;background:#fff;border-radius:50%}
+.score-inner{position:relative;z-index:1;text-align:center}
+.score-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;display:block;color:var(--ink)}
+.score-denom{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.05em}
+.stat-row{display:flex;gap:10px;margin-bottom:22px}
+.stat{flex:1;background:var(--cream);border:1px solid var(--border);border-radius:12px;padding:16px 10px;text-align:center}
+.stat-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:600;display:block;color:var(--ink)}
+.stat-val.green{color:var(--green)}.stat-val.red{color:var(--red)}.stat-val.gold{color:var(--gold)}
+.stat-lbl{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.sec-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.wrong-item{display:flex;align-items:center;padding:12px 16px;background:var(--cream);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;font-family:'Crimson Pro',serif;font-size:15px;gap:12px;flex-wrap:wrap;transition:box-shadow .2s}
+.wrong-item:hover{box-shadow:var(--shadow-sm)}
+.wrong-german{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--red)}
+.wrong-arrow{color:var(--border2)}
+.wrong-en{color:var(--green);font-weight:600}
+.wrong-yours{font-size:13px;color:var(--muted);margin-left:auto;font-style:italic}
+
+/* XP BANNER */
+.xp-banner{background:var(--gold-pale);border:1px solid var(--gold-light);border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:14px;margin-bottom:18px;box-shadow:0 2px 8px rgba(184,134,11,.08)}
+.xp-icon{font-size:26px}
+.xp-text strong{font-family:'Playfair Display',serif;color:var(--gold);font-size:20px;font-weight:600;display:block}
+.xp-text span{font-size:13px;color:var(--muted);font-style:italic}
+
+/* LESSON CARDS */
+.lesson-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.lesson-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:16px 20px;cursor:pointer;transition:all .25s ease;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow-sm)}
+.lesson-card:hover{border-color:var(--gold);transform:translateX(3px);box-shadow:var(--shadow-md)}
+.lesson-card.passed{border-color:var(--green-border);background:var(--green-bg)}
+.lesson-card.locked{opacity:.5;cursor:not-allowed;transform:none!important}
+.lc-icon{font-size:26px;flex-shrink:0;width:40px;text-align:center}
+.lc-body{flex:1}
+.lc-title{font-family:'Playfair Display',serif;font-weight:600;font-size:17px;margin-bottom:2px;color:var(--ink)}
+.lc-desc{font-family:'Crimson Pro',serif;font-size:13px;color:var(--muted);font-style:italic}
+.lc-badge{font-family:'DM Mono',monospace;font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;margin-left:auto;flex-shrink:0}
+.lc-badge.passed{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.lc-badge.new{background:var(--gold-pale);color:var(--gold);border:1px solid var(--gold-light)}
+.lc-badge.locked{background:var(--cream2);color:var(--muted);border:1px solid var(--border)}
+
+/* NAV BAR */
+.nav-bar{display:flex;background:#fff;border:1px solid var(--border);border-radius:16px;padding:6px;gap:4px;margin-bottom:16px;box-shadow:var(--shadow-sm)}
+.nav-item{flex:1;padding:10px 4px;border:none;border-radius:11px;cursor:pointer;font-family:'Crimson Pro',serif;font-size:14px;color:var(--muted);background:transparent;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:3px}
+.nav-item .ni{font-size:18px}
+.nav-item.active{background:var(--cream2);color:var(--ink);font-weight:600}
+.nav-item:hover:not(.active){color:var(--ink2)}
+
+/* LEVEL TABS */
+.level-tabs{display:flex;gap:6px;margin-bottom:24px}
+.level-tab{flex:1;padding:10px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;font-family:'Playfair Display',serif;font-size:15px;font-weight:600;background:#fff;color:var(--muted);transition:all .2s;text-align:center}
+.level-tab.active{border-color:var(--gold);background:var(--gold-pale);color:var(--gold);box-shadow:0 2px 8px rgba(184,134,11,.15)}
+.level-tab:hover:not(.active){border-color:var(--ink3);color:var(--ink)}
+
+/* TOPICS */
+.topics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.topic-pill{background:var(--cream2);border:1px solid var(--border);border-radius:30px;padding:5px 14px;font-family:'Crimson Pro',serif;font-size:14px;color:var(--ink3);font-style:italic;transition:all .2s}
+.topic-pill:hover{background:var(--gold-pale);border-color:var(--gold-light);color:var(--gold)}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--cream);border-radius:10px;padding:12px 22px;font-family:'Crimson Pro',serif;font-size:15px;display:none;z-index:9999;box-shadow:var(--shadow-lg);white-space:nowrap}
+.toast.show{display:block;animation:toastIn .3s cubic-bezier(.22,.68,0,1.2)}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+/* MISC */
+.gold-divider{display:flex;align-items:center;gap:12px;margin:20px 0}
+.gold-divider::before,.gold-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-light),transparent)}
+.gold-divider-dot{width:5px;height:5px;border-radius:50%;background:var(--gold-light)}
+.loading{text-align:center;color:var(--muted);padding:32px;font-family:'Crimson Pro',serif;font-size:16px;font-style:italic}
+.level-badge-large{display:inline-flex;align-items:center;justify-content:center;width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#fff;font-family:'Playfair Display',serif;font-size:26px;font-weight:700;box-shadow:0 4px 20px rgba(184,134,11,.35);margin:16px auto}
+@media(max-width:500px){h1{font-size:38px}.card{padding:28px 22px}.quiz-word{font-size:42px}#clock-widget{top:12px;left:12px}.clock-face{width:58px;height:58px}}
+</style>
+</head>
+<body>
+
+<div id="clock-widget">
+  <div class="clock-face">
+    <div class="clock-mark"></div><div class="clock-mark"></div><div class="clock-mark"></div><div class="clock-mark"></div><div class="clock-mark"></div><div class="clock-mark"></div><div class="clock-mark"></div><div class="clock-mark"></div><div class="clock-mark"></div><div class="clock-mark"></div><div class="clock-mark"></div><div class="clock-mark"></div>
+    <div class="clock-hand" id="hand-hour"></div>
+    <div class="clock-hand" id="hand-min"></div>
+    <div class="clock-hand" id="hand-sec"></div>
+    <div class="clock-center"></div>
+  </div>
+  <div class="clock-time-text" id="clockText">00:00</div>
+</div>
+
+<div id="app">
+<div id="toast" class="toast"></div>
+
+<div class="screen active" id="s-auth">
+  <div class="card" style="margin-top:40px">
+    <svg class="hero-deco" viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="80" stroke="currentColor" stroke-width="1"/><circle cx="100" cy="100" r="60" stroke="currentColor" stroke-width=".5"/><circle cx="100" cy="100" r="40" stroke="currentColor" stroke-width=".5"/><line x1="100" y1="20" x2="100" y2="180" stroke="currentColor" stroke-width=".5"/><line x1="20" y1="100" x2="180" y2="100" stroke="currentColor" stroke-width=".5"/><line x1="43" y1="43" x2="157" y2="157" stroke="currentColor" stroke-width=".5"/><line x1="157" y1="43" x2="43" y2="157" stroke="currentColor" stroke-width=".5"/><polygon points="100,30 115,85 170,100 115,115 100,170 85,115 30,100 85,85" stroke="currentColor" stroke-width=".5" fill="none"/></svg>
+    <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Sprachmeister</span></div>
+    <div class="hero-lang-badge">🇩🇪 Deutsch lernen</div>
+    <h1>The art of<br>learning <em>German.</em></h1>
+    <p class="sub">A C++-powered language learning system. Premium curriculum from A1 to B2 — your progress persists, your pace is yours.</p>
+    <div class="gold-divider"><div class="gold-divider-dot"></div></div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('login')">Sign in</button>
+      <button class="tab" onclick="switchTab('register')">Register</button>
+    </div>
+    <div id="loginForm">
+      <div class="field"><label>Username</label><input type="text" id="loginUser" placeholder="your username" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div class="field"><label>Password</label><input type="password" id="loginPass" placeholder="your password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <button class="btn btn-gold" onclick="doLogin()">Continue →</button>
+    </div>
+    <div id="registerForm" style="display:none">
+      <div class="field"><label>Choose a username</label><input type="text" id="regUser" placeholder="min. 3 characters" autocomplete="off"></div>
+      <div class="field"><label>Choose a password</label><input type="password" id="regPass" placeholder="min. 4 characters"></div>
+      <button class="btn btn-gold" onclick="doRegister()">Create account →</button>
+    </div>
+    <div class="hero-accent"></div>
+  </div>
+</div>
+
+<div class="screen" id="s-placement">
+  <div class="card">
+    <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Placement Test</span></div>
+    <h2>Let's find your level</h2>
+    <p class="sub" id="placeSub">Words across all levels. Don't worry if you don't know — just type your best guess.</p>
+    <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" id="placeProgress" style="width:0%"></div></div><span class="prog-label" id="placeCounter">0 / 12</span></div>
+    <div class="flashcard-scene"><div class="flashcard"><div class="fc-badge">Translate to English</div><div class="fc-german" id="placeWord"></div><div class="fc-roman" id="placeRoman"></div></div></div>
+    <div class="field"><input type="text" id="placeInput" placeholder="Your English translation..." onkeydown="if(event.key==='Enter')submitPlacement()"></div>
+    <button class="btn btn-gold" onclick="submitPlacement()">Submit →</button>
+  </div>
+</div>
+
+<div class="screen" id="s-place-result">
+  <div class="card" style="text-align:center">
+    <div class="eyebrow" style="justify-content:center"><div class="eyebrow-line"></div><span class="eyebrow-text">Your Level</span><div class="eyebrow-line" style="background:linear-gradient(270deg,var(--gold),transparent)"></div></div>
+    <div style="display:flex;justify-content:center"><div class="level-badge-large" id="placeResultBadge">A1</div></div>
+    <h2 id="placeResultLevel" style="text-align:center"></h2>
+    <p class="sub" id="placeResultMsg" style="text-align:center"></p>
+    <div class="xp-banner"><span class="xp-icon">🎯</span><div class="xp-text"><strong id="placeScore"></strong><span>Placement test score</span></div></div>
+    <button class="btn btn-gold" onclick="goToDashboard()">Begin Learning →</button>
+  </div>
+</div>
+
+<div class="screen" id="s-dashboard">
+  <div class="nav-bar">
+    <button class="nav-item active" id="nav-learn" onclick="navTo('learn')"><span class="ni">📖</span><span>Learn</span></button>
+    <button class="nav-item" id="nav-progress" onclick="navTo('progress')"><span class="ni">📊</span><span>Progress</span></button>
+  </div>
+  <div id="panel-learn">
+    <div class="card">
+      <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Sprachmeister</span><span class="eyebrow-tag">/api/lessons</span></div>
+      <h2 id="dashTitle">Learning</h2>
+      <p class="sub" id="dashWelcome"></p>
+      <div class="level-tabs" id="levelTabs"></div>
+      <div class="sec-label">Topics in this level</div>
+      <div class="topics" id="topicPills"></div>
+      <div class="sec-label">Lessons <span class="eyebrow-tag">/api/lesson/:id</span></div>
+      <div class="lesson-grid" id="lessonGrid"><div class="loading">Loading lessons...</div></div>
+    </div>
+  </div>
+  <div id="panel-progress" style="display:none">
+    <div class="card">
+      <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Progress</span><span class="eyebrow-tag">/api/progress/:user</span></div>
+      <h2>Your Progress</h2>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-val gold" id="pgXP">0</span><span class="stat-lbl">Total XP</span></div>
+        <div class="stat"><span class="stat-val" id="pgStreak">0</span><span class="stat-lbl">Streak</span></div>
+        <div class="stat"><span class="stat-val" id="pgLevel">A1</span><span class="stat-lbl">Unlocked</span></div>
+        <div class="stat"><span class="stat-val" id="pgTime">0s</span><span class="stat-lbl">Time</span></div>
+      </div>
+      <div class="sec-label">Lesson history</div>
+      <div id="pgHistory"><div class="loading">Loading...</div></div>
+    </div>
+    <div class="card">
+      <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Leaderboard</span><span class="eyebrow-tag">/api/leaderboard</span></div>
+      <h2>🏆 Leaderboard</h2>
+      <div id="pgLeaderboard"><div class="loading">Loading...</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="s-lesson">
+  <div class="card">
+    <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text" id="lessonLogo">Lesson</span></div>
+    <h2 id="lessonTitle"></h2>
+    <p class="sub" id="lessonDesc"></p>
+    <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" id="lessonProg" style="width:10%"></div></div><span class="prog-label" id="lessonCounter">1 / 10</span></div>
+    <div class="flashcard-scene"><div class="flashcard">
+      <div id="fcStandard">
+        <div class="fc-badge" id="fcCat">German</div>
+        <div class="fc-german" id="fcWord"></div>
+        <div class="fc-roman" id="fcRoman"></div>
+      </div>
+      <div id="fcAlphabet" style="display:none;flex-direction:column;align-items:center">
+        <div class="fc-badge">Alphabet</div>
+        <div class="fc-letter" id="fcLetter"></div>
+        <div class="fc-cols">
+          <div class="fc-col"><div class="fc-col-label">English</div><div class="fc-col-val" id="fcAlphEn"></div></div>
+          <div class="fc-col"><div class="fc-col-label">German sound</div><div class="fc-col-val" id="fcAlphSound"></div></div>
+        </div>
+      </div>
+      <div class="fc-example" id="fcExample"></div>
+      <div class="fc-trans" id="fcTrans"></div>
+    </div></div>
+    <div class="nav-row">
+      <button class="nav-btn" id="prevBtn" onclick="prevCard()" disabled>←</button>
+      <span class="card-counter" id="cardCounter">Word 1 of ?</span>
+      <button class="nav-btn" id="nextBtn" onclick="nextCard()">→</button>
+    </div>
+    <div class="field" id="doneField">
+      <label>Type <strong style="color:var(--gold);font-weight:700">done</strong> when you're ready for the quiz</label>
+      <input type="text" id="doneInput" placeholder='type "done" here...' onkeydown="checkDone(event)">
+    </div>
+    <button class="btn btn-ghost" onclick="goToDashboard()" style="margin-top:10px">← Back to Lessons</button>
+  </div>
+</div>
+
+<div class="screen" id="s-quiz">
+  <div class="card">
+    <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Quiz</span><span class="eyebrow-tag">/api/quiz/answer</span></div>
+    <div class="prog-wrap" style="margin-bottom:8px"><div class="prog-bar"><div class="prog-fill" id="quizProg" style="width:0%"></div></div><span class="prog-label" id="quizCounter">0/10</span></div>
+    <div class="quiz-word" id="quizWord"></div>
+    <div class="quiz-roman" id="quizRoman"></div>
+    <div class="quiz-input-wrap">
+      <input type="text" id="quizInput" placeholder="English translation..." autocomplete="off" onkeydown="handleQuizKey(event)">
+      <button id="submitBtn" onclick="submitAnswer()">↵</button>
+    </div>
+    <div class="feedback" id="feedbackBox"></div>
+    <button class="btn btn-gold" id="nextQuizBtn" style="display:none" onclick="nextAfterFeedback()">Next word →</button>
+  </div>
+</div>
+
+<div class="screen" id="s-results">
+  <div class="card">
+    <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Results</span></div>
+    <h2 id="resTitle">Quiz Complete!</h2>
+    <p class="sub" id="resSub"></p>
+    <div class="xp-banner"><span class="xp-icon">⭐</span><div class="xp-text"><strong id="resXP">+0 XP</strong><span>2 XP per correct answer</span></div></div>
+    <div class="score-ring-wrap"><div class="score-circle" id="scoreCircle"><div class="score-inner"><span class="score-num" id="resNum">0</span><span class="score-denom" id="resDenom">/ 0</span></div></div></div>
+    <div class="stat-row">
+      <div class="stat"><span class="stat-val green" id="resCorrect">0</span><span class="stat-lbl">Correct</span></div>
+      <div class="stat"><span class="stat-val red" id="resWrong">0</span><span class="stat-lbl">Wrong</span></div>
+      <div class="stat"><span class="stat-val gold" id="resXPStat">0</span><span class="stat-lbl">XP</span></div>
+      <div class="stat"><span class="stat-val" id="resTime">0s</span><span class="stat-lbl">Time</span></div>
+    </div>
+    <div id="wrongSection"><div class="sec-label">Words to review</div><div id="wrongList"></div></div>
+    <div class="btn-row" style="margin-top:22px">
+      <button class="btn btn-ghost" onclick="revise()">📖 Revise</button>
+      <button class="btn btn-gold" onclick="retake()">🔄 Retake</button>
+    </div>
+    <button class="btn btn-ghost" onclick="goToDashboard()" style="margin-top:10px">← Back to Lessons</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+// CLOCK
+function tickClock(){const now=new Date(),h=now.getHours(),m=now.getMinutes(),s=now.getSeconds(),hDeg=(h%12)*30+m*.5,mDeg=m*6+s*.1,sDeg=s*6;document.getElementById('hand-hour').style.transform=`rotate(${hDeg}deg)`;document.getElementById('hand-min').style.transform=`rotate(${mDeg}deg)`;document.getElementById('hand-sec').style.transform=`rotate(${sDeg}deg)`;document.getElementById('clockText').textContent=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')}
+tickClock();setInterval(tickClock,1000);
+
+// STATE
+const S={username:'',level:'A1',currentLesson:null,cardIndex:0,quizAnswered:false,pendingResult:null,activeLessonId:'',quizStartTime:0};
+
+// HELPERS
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById(id);el.classList.remove('active');void el.offsetWidth;el.classList.add('active');window.scrollTo(0,0)}
+async function api(method,path,body=null){const opts={method,headers:{'Content-Type':'application/json'}};if(body)opts.body=JSON.stringify(body);const res=await fetch(path,opts);const data=await res.json();if(!data.ok)throw new Error(data.error||'Server error');return data}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
+
+// AUTH
+function switchTab(tab){document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',(i===0)===(tab==='login')));document.getElementById('loginForm').style.display=tab==='login'?'':'none';document.getElementById('registerForm').style.display=tab==='register'?'':'none'}
+async function doLogin(){const username=document.getElementById('loginUser').value.trim(),password=document.getElementById('loginPass').value;if(!username||!password){showToast('Enter username and password');return}try{const data=await api('POST','/api/user/login',{username,password});S.username=data.username;S.level=data.level;afterLogin(data)}catch(e){showToast(e.message)}}
+async function doRegister(){const username=document.getElementById('regUser').value.trim(),password=document.getElementById('regPass').value;try{await api('POST','/api/user/register',{username,password});showToast('Account created! Signing you in...');document.getElementById('loginUser').value=username;document.getElementById('loginPass').value=password;switchTab('login');setTimeout(doLogin,600)}catch(e){showToast(e.message)}}
+function afterLogin(data){if(data.isNewUser)startPlacement();else goToDashboard()}
+
+// PLACEMENT
+async function startPlacement(){show('s-placement');try{const data=await api('POST','/api/placement/start',{username:S.username});renderPlacementQ(data.question)}catch(e){showToast(e.message)}}
+function renderPlacementQ(q){document.getElementById('placeWord').textContent=q.german||'';document.getElementById('placeRoman').textContent=q.roman?'/'+q.roman+'/':'';const num=q.questionNum||1,total=q.total||12;document.getElementById('placeProgress').style.width=((num-1)/total*100)+'%';document.getElementById('placeCounter').textContent=(num-1)+' / '+total;document.getElementById('placeInput').value='';setTimeout(()=>document.getElementById('placeInput').focus(),80)}
+async function submitPlacement(){const answer=document.getElementById('placeInput').value.trim();try{const data=await api('POST','/api/placement/answer',{username:S.username,answer});if(data.placementDone){S.level=data.assignedLevel;document.getElementById('placeResultBadge').textContent=data.assignedLevel;document.getElementById('placeResultLevel').textContent=data.levelName;document.getElementById('placeResultMsg').textContent=data.welcome;document.getElementById('placeScore').textContent=data.score+' / '+data.total+' correct';show('s-place-result')}else renderPlacementQ(data.nextQuestion)}catch(e){showToast(e.message)}}
+
+// DASHBOARD
+async function goToDashboard(){show('s-dashboard');navTo('learn');await loadDashboard(S.level)}
+async function loadDashboard(level){S.level=level;const allLevels=['A1','A2','B1','B2'];const tabsEl=document.getElementById('levelTabs');tabsEl.innerHTML='';allLevels.forEach(l=>{const btn=document.createElement('button');btn.className='level-tab'+(l===level?' active':'');btn.textContent=l;btn.onclick=()=>loadDashboard(l);tabsEl.appendChild(btn)});try{const tData=await api('GET',`/api/topics/${level}?user=${S.username}&t=${Date.now()}`);document.getElementById('dashTitle').textContent=tData.levelName;document.getElementById('dashWelcome').textContent=tData.welcome;const pills=document.getElementById('topicPills');pills.innerHTML=tData.topics.map(t=>`<span class="topic-pill">${t}</span>`).join('')}catch(e){}try{const data=await api('GET',`/api/lessons/${level}?user=${S.username}&t=${Date.now()}`);renderLessons(data.lessons)}catch(e){document.getElementById('lessonGrid').innerHTML='<div class="loading">Could not load lessons.</div>'}}
+function renderLessons(lessons){const icons={a1_alphabets:'🔤',a1_numbers:'🔢',a1_colors:'🎨',a1_greetings:'👋',a1_sentences:'💬',a1_food:'🍎',a2_conversations:'🗣️',a2_perfekt:'⏪',a2_phrases:'📝',a2_family:'👨‍👩‍👧',a2_time:'🕐',a2_shopping:'🛒',b1_cases:'🏛️',b1_modal:'⚙️',b1_conversation:'💼',b1_writing:'✍️',b1_travel:'✈️',b1_opinions:'💭',b2_konjunktiv:'🌀',b2_debate:'🎤',b2_workplace:'🏢',b2_idioms:'🥨',b2_complex_grammar:'📐',b2_reallife:'🌍'};const grid=document.getElementById('lessonGrid');if(!lessons||lessons.length===0){grid.innerHTML='<div class="loading">No lessons found for this level.</div>';return}grid.innerHTML=lessons.map(l=>{const locked=l.unlocked===false,passed=l.passed,icon=icons[l.id]||'📝',badgeClass=passed?'passed':locked?'locked':'new',badgeText=passed?'✓ Passed':locked?'🔒 Locked':'New',cardClass='lesson-card'+(passed?' passed':'')+(locked?' locked':''),click=locked?'':`onclick="openLesson('${l.id}')"`;return`<div class="${cardClass}" ${click}><span class="lc-icon">${icon}</span><div class="lc-body"><div class="lc-title">${l.title}</div><div class="lc-desc">${l.description} · ${l.wordCount} words · ${l.xpReward} XP</div></div><span class="lc-badge ${badgeClass}">${badgeText}</span></div>`}).join('')}
+
+// NAV
+async function navTo(panel){['learn','progress'].forEach(p=>{document.getElementById('panel-'+p).style.display=p===panel?'':'none';document.getElementById('nav-'+p).classList.toggle('active',p===panel)});if(panel==='progress')await loadProgress()}
+async function loadProgress(){try{const data=await api('GET',`/api/progress/${S.username}`);document.getElementById('pgXP').textContent=data.totalXP;document.getElementById('pgStreak').textContent=data.streak;document.getElementById('pgLevel').textContent=data.unlockedLevel;document.getElementById('pgTime').textContent=fmtTime(data.progress?.timeSpentSeconds||0);const hist=data.progress?.lessonHistory||[];const pgEl=document.getElementById('pgHistory');if(hist.length===0){pgEl.innerHTML='<div class="loading">No lessons completed yet.</div>'}else{pgEl.innerHTML=hist.map(h=>`<div class="wrong-item"><span style="font-weight:600;font-family:'Playfair Display',serif">${h.lessonId}</span><span class="wrong-arrow">·</span><span class="wrong-en">Best: ${h.bestScore}%</span><span class="wrong-yours">${h.attempts} attempt${h.attempts!==1?'s':''} · ${h.xpEarned} XP</span></div>`).join('')}}catch(e){showToast(e.message)}try{const lb=await api('GET','/api/leaderboard');const lbEl=document.getElementById('pgLeaderboard');const rows=lb.leaderboard||[];if(rows.length===0){lbEl.innerHTML='<div class="loading">No users yet.</div>';return}const rankStyle=['color:var(--gold);font-weight:700','color:#888;font-weight:600','color:#CD7F32;font-weight:600'];lbEl.innerHTML=rows.map(r=>{const rs=rankStyle[r.rank-1]||'color:var(--muted)';return`<div class="wrong-item"><span style="${rs};min-width:28px;font-family:'DM Mono',monospace">#${r.rank}</span><span class="wrong-arrow">·</span><span style="flex:1;font-weight:600;font-family:'Playfair Display',serif">${r.username}</span><span class="wrong-en">${r.xp} XP</span><span class="wrong-yours">${r.level}</span></div>`}).join('')}catch(e){showToast(e.message)}}
+
+// LESSON
+async function openLesson(lessonId){S.activeLessonId=lessonId;try{const data=await api('GET',`/api/lesson/${lessonId}?user=${S.username}`);S.currentLesson=data.lesson;S.cardIndex=0;document.getElementById('lessonLogo').textContent=data.lesson.level+' · '+data.lesson.title;document.getElementById('lessonTitle').textContent=data.lesson.title;document.getElementById('lessonDesc').textContent=data.lesson.description;document.getElementById('doneInput').value='';renderCard();show('s-lesson')}catch(e){showToast(e.message)}}
+function renderCard(){const words=S.currentLesson.words,w=words[S.cardIndex],isAlph=w.category==='alphabet';document.getElementById('fcStandard').style.display=isAlph?'none':'';document.getElementById('fcAlphabet').style.display=isAlph?'flex':'none';if(isAlph){const parts=w.german.split(' – ');const letter=parts[0]?parts[0].trim():w.german;const sound=parts[1]?parts[1].trim():w.roman;document.getElementById('fcLetter').textContent=letter;document.getElementById('fcAlphEn').textContent=w.english;document.getElementById('fcAlphSound').textContent=sound;document.getElementById('doneField').style.display='none'}else{document.getElementById('fcCat').textContent=w.category||'German';document.getElementById('fcWord').textContent=w.german;document.getElementById('fcRoman').textContent=w.roman?'/'+w.roman+'/':'';document.getElementById('doneField').style.display=''}document.getElementById('fcExample').textContent=w.example||'';document.getElementById('fcTrans').textContent=w.exampleTrans||'';const pct=((S.cardIndex+1)/words.length*100).toFixed(0);document.getElementById('lessonProg').style.width=pct+'%';document.getElementById('lessonCounter').textContent=(S.cardIndex+1)+' / '+words.length;document.getElementById('cardCounter').textContent='Word '+(S.cardIndex+1)+' of '+words.length;document.getElementById('prevBtn').disabled=S.cardIndex===0;document.getElementById('nextBtn').disabled=S.cardIndex===words.length-1;}
+function nextCard(){if(S.cardIndex<S.currentLesson.words.length-1){S.cardIndex++;renderCard()}}
+function prevCard(){if(S.cardIndex>0){S.cardIndex--;renderCard()}}
+function checkDone(e){if(e.key!=='Enter')return;if(document.getElementById('doneInput').value.trim().toLowerCase()==='done'){const isAlph=S.currentLesson?.words?.every(w=>w.category==='alphabet');if(isAlph){showToast('Alphabet lessons are for pronunciation — no quiz needed!');document.getElementById('doneInput').value=''}else startQuiz()}else{document.getElementById('doneInput').value='';document.getElementById('doneInput').placeholder='type exactly "done" to continue...'}}
+
+// QUIZ
+async function startQuiz(){try{const data=await api('POST','/api/quiz/start',{username:S.username,lessonId:S.activeLessonId});S.quizStartTime=Date.now();renderQuizQ(data.question,data.questionNum,data.total);show('s-quiz')}catch(e){showToast(e.message)}}
+function renderQuizQ(q,num,total){document.getElementById('quizWord').textContent=q.german;document.getElementById('quizRoman').textContent=q.roman?'/'+q.roman+'/':'';document.getElementById('quizInput').value='';document.getElementById('quizInput').disabled=false;document.getElementById('feedbackBox').className='feedback';document.getElementById('nextQuizBtn').style.display='none';document.getElementById('submitBtn').style.display='flex';S.quizAnswered=false;const pct=((num-1)/total*100).toFixed(0);document.getElementById('quizProg').style.width=pct+'%';document.getElementById('quizCounter').textContent=(num-1)+'/'+total;setTimeout(()=>document.getElementById('quizInput').focus(),80);}
+function handleQuizKey(e){if(e.key==='Enter'){if(!S.quizAnswered)submitAnswer();else nextAfterFeedback()}}
+async function submitAnswer(){if(S.quizAnswered)return;const answer=document.getElementById('quizInput').value.trim();try{const data=await api('POST','/api/quiz/answer',{username:S.username,answer});S.quizAnswered=true;S.pendingResult=data;document.getElementById('quizInput').disabled=true;document.getElementById('nextQuizBtn').style.display='block';document.getElementById('submitBtn').style.display='none';const fb=document.getElementById('feedbackBox');if(data.correct){fb.className='feedback correct';fb.textContent='✓ Correct! +'+data.xpAwarded+' XP  (Total: '+data.totalXP+' XP)'}else{fb.className='feedback wrong';fb.textContent='✗ Answer: '+data.correctAnswer}}catch(e){showToast(e.message)}}
+function nextAfterFeedback(){const data=S.pendingResult;if(!data)return;if(data.finished)saveAndShowResults(data.results);else renderQuizQ(data.nextQuestion,data.questionNum,data.total);S.pendingResult=null}
+
+// RESULTS
+async function saveAndShowResults(results){const timeSpent=Math.floor((Date.now()-S.quizStartTime)/1000);try{await api('POST','/api/quiz/finish',{username:S.username,lessonId:S.activeLessonId,timeSpent})}catch(e){}showResults(results,timeSpent)}
+function fmtTime(s){return s<60?s+'s':Math.floor(s/60)+'m '+(s%60)+'s'}
+function showResults(r,timeSpent=0){const pct=r.pct||0,xp=r.correct*2;let title='Quiz Complete!',sub='';if(pct===100){title='Perfekt! 🎉';sub='Flawless — every word nailed.'}else if(pct>=70){title='Gut gemacht! 👏';sub='Great work! Review the missed words below.'}else{title='Keep going!';sub='German takes practice. Revise and try again.'}document.getElementById('resTitle').textContent=title;document.getElementById('resSub').textContent=sub;document.getElementById('resXP').textContent='+'+xp+' XP';document.getElementById('resNum').textContent=r.correct;document.getElementById('resDenom').textContent='/ '+r.total;document.getElementById('resCorrect').textContent=r.correct;document.getElementById('resWrong').textContent=r.total-r.correct;document.getElementById('resXPStat').textContent=xp;document.getElementById('resTime').textContent=fmtTime(timeSpent);document.getElementById('scoreCircle').style.setProperty('--pct',pct+'%');const sec=document.getElementById('wrongSection'),list=document.getElementById('wrongList');list.innerHTML='';if(!r.wrongAnswers||r.wrongAnswers.length===0){sec.style.display='none'}else{sec.style.display='';r.wrongAnswers.forEach(w=>{const d=document.createElement('div');d.className='wrong-item';d.innerHTML=`<span class="wrong-german">${w.german}</span><span class="wrong-arrow">→</span><span class="wrong-en">${w.correct}</span><span class="wrong-yours">you said: "${w.given||'—'}"</span>`;list.appendChild(d)})}show('s-results')}
+function revise(){openLesson(S.activeLessonId)}
+async function retake(){try{const data=await api('POST','/api/quiz/retake',{username:S.username,lessonId:S.activeLessonId});S.quizStartTime=Date.now();renderQuizQ(data.question,data.questionNum,data.total);show('s-quiz')}catch(e){showToast(e.message)}}
+
+document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
+</script>
+</body>
+</html>

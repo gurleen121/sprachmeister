@@ -1,0 +1,6 @@
+sprachmeister
+*.o
+data/users.json
+data/progress/
+include/crow.h
+include/nlohmann/
